@@ -1,8 +1,15 @@
 import express from "express";
 
-const router = express.Router();
+import validate from "../configs/ajv-config";
+import imageUploadSchema from "../validations/common-schema";
 import * as controllers from "../controllers/common-controllers";
 
-router.post("/upload", controllers.uploadImage);
+const router = express.Router();
+
+router.post(
+  "/upload",
+  validate({ body: imageUploadSchema }),
+  controllers.uploadImage
+);
 
 export default router;
