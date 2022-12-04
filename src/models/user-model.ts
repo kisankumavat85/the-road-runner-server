@@ -52,6 +52,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Date of birth is required"],
   },
+  profileImageUrl: {
+    type: String,
+  },
   address: {
     home: addressSchema,
     work: addressSchema,

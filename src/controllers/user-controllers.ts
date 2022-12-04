@@ -39,7 +39,8 @@ export const signup = async (
   response: Response,
   next: NextFunction
 ) => {
-  const { firstName, lastName, email, password, gender, dob } = request.body;
+  const { firstName, lastName, email, password, gender, dob, profileImageUrl } =
+    request.body;
 
   let existingUser;
 
@@ -64,6 +65,7 @@ export const signup = async (
     password,
     gender,
     dob,
+    profileImageUrl,
   });
 
   try {
@@ -80,6 +82,7 @@ export const signup = async (
     lastName: createdUser.lastName,
     dob: createdUser.dob,
     gender: createdUser.gender,
+    profileImageUrl: createdUser.profileImageUrl,
   });
 
   // response.send("Login");

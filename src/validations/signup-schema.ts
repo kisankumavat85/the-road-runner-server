@@ -1,4 +1,5 @@
 import { AllowedSchema } from "express-json-validator-middleware";
+import { Gender, Regex } from "../constants/common-constant";
 
 const signupSchema: AllowedSchema = {
   type: "object",
@@ -23,11 +24,15 @@ const signupSchema: AllowedSchema = {
     },
     gender: {
       type: "string",
-      enum: ["Male", "Female"],
+      enum: [Gender.MALE, Gender.FEMALE],
     },
     dob: {
       type: "string",
       format: "date-time",
+    },
+    profileImageUrl: {
+      type: "string",
+      pattern: Regex.cloudinaryUrl,
     },
   },
   errorMessage: {

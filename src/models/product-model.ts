@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Gender } from "../constants/common-constant";
 
 const variantsSchema = new mongoose.Schema({
   sizes: [
@@ -49,18 +50,36 @@ const productSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ["male", "female"],
+    enum: [Gender.FEMALE, Gender.MALE],
     required: [true, "Gender for product is required"],
   },
   category: {
     type: String,
-    enum: ["running", "walking", "training", "football", "cricket"],
+    enum: [
+      "running",
+      "walking",
+      "training",
+      "football",
+      "cricket",
+      "lifestyle",
+    ],
     required: [true, "Product category is required"],
   },
   averageRating: {
     type: Number,
   },
-  variants: [variantsSchema],
+  variants: {
+    type: [variantsSchema],
+    required: [true, "Product variant is required"],
+  },
+});
+
+productSchema.index({
+  title: "text",
+  subTitle: "text",
+  description: "text",
+  gender: "text",
+  category: "text",
 });
 
 const productModle = mongoose.model("Product", productSchema);

@@ -59,6 +59,6 @@ export const deleteCategory = async (
   }
 
   response.json({
-    message: "Country deleted successfully",
+    message: "Category deleted successfully",
   });
 };

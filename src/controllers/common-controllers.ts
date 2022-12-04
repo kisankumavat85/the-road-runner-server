@@ -28,7 +28,7 @@ export const uploadImage = async (
     const result = await cloudinary.uploader.upload(file.tempFilePath, {
       folder: folderName,
     });
-    response.send({ ...result });
+    response.send({ url: result.url, secureUrl: result.secure_url });
   } catch (err) {
     const error = new HttpError(500, "Something went wrong");
     return next(error);

@@ -1,11 +1,17 @@
 import express from "express";
 
+import validate from "../configs/ajv-config";
 import * as controllers from "../controllers/product-controllers";
+import { createProductSchema } from "../validations/product-schema";
 
 const router = express.Router();
 
 router.get("/", controllers.getProducts);
-router.post("/", controllers.createProduct);
+router.post(
+  "/",
+  validate({ body: createProductSchema }),
+  controllers.createProduct
+);
 router.get("/:id", controllers.getProductById);
 router.patch("/:id", controllers.updateProduct);
 router.delete("/:id", controllers.deleteProduct);
